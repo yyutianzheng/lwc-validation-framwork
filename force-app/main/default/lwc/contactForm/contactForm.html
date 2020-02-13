@@ -1,0 +1,20 @@
+<template> 
+    <div class="container">
+        <div class="contact-form-container slds-p-around_medium">
+        
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-p-around_medium lgc-bg">
+                        <lightning-input type="email" min-length=5 name="email" required label="E-mail address" value={contact.email} class="standard-validation custom-validation"></lightning-input>
+                    </div>
+                    <div class="slds-p-around_medium lgc-bg">
+                        <lightning-input type="tel"  name="phone" label="Phone Number" value={contact.phone} class="standard-validation"></lightning-input>
+                    </div>
+                </div>
+
+                <lightning-button type="submit"
+                label="Submit"
+                onclick={handleSubmit}>
+</lightning-button>
+        </div>
+</div>
+</template>

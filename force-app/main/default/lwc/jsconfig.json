@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/contactForm": [
+                "contactForm/contactForm.js"
+            ],
+            "c/formValidator": [
+                "formValidator/formValidator.js"
+            ],
+            "c/manageGame": [
+                "manageGame/manageGame.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}
