@@ -1,39 +1,58 @@
 import ValidatorFactory from './validatorFactory.js'
-import ValidationError from './validationError.js'
+import Result from './result.js' 
+import Message from './message.js'
 class FormValidator {
     constructor(tmpl){
         this.template = tmpl;
         this.validationFields = tmpl.querySelectorAll('.standard-validation');
-        this.validationError = ValidationError();
     }
     
     validateAll() {
-        this.validationError.clear();
+        Result.clear();
         this.validationFields.forEach( field => {
             this.checkValidity(field);
         });
-        if(this.validationError.hasErrors)
-            this.validationError.fireInlineMessages();            
+        if(Result.hasErrors)
+            Result.fireInlineErrors();            
     }
 
     checkValidity(field){
         if(!field.validity.valid){
-            const errorMessage = this.validationError.generateMessage(field)
-            field.setCustomValidity(errorMessage);
+            const customErrorMsg = Message.generateMessage(field);
+            field.setCustomValidity(customErrorMsg);
+            Result.addInvalidField(field);
+            this.setEventListener(field);
         } else if(field.classList.contains('custom-validation')){
-            //TODO
-             console.log('custom validation fired')
-            //this.runCustomValidation(field);
+            this.runCustomValidation(field);
         }
     }
     
     runCustomValidation(field) {
         //TODO
+        /*
         let validator = ValidatorFactory.getValidator(field.name)
         validator.validate(field);
         if(!validator.valid)
-            //this.validationResult.addInvalidField(field);
+            this.handleInvalidInput(field);
         console.log(this.validationResult);
+        */
+    }
+
+    setEventListener(selectElement){
+        //field.addEventListener("keyup", console.log('dsadf'));
+        selectElement.addEventListener('change', (event) => {
+            console.log('this is working');
+        });
+    }
+
+
+    checkSingleField(field){
+        field.setCustomValidity('');
+            if(!field.validity.valid){
+                const customErrorMsg = Message.generateMessage(field);
+                field.setCustomValidity(customErrorMsg);
+                Result.addInvalidField(field);
+            }
     }
 }
 export const getInstance = (tmpl) => {

@@ -4,15 +4,12 @@ import { getInstance } from 'c/formValidator';
 export default class ContactForm extends LightningElement {
     @track contact = {email: 'yt@'}
     handleSubmit(){
-        let formValidator = {};
-        let tmpl = this.template;
-        formValidator = getInstance(tmpl);
+        const tmpl = this.template;
+        const formValidator = getInstance(tmpl);
         formValidator.validateAll();
     }
 
 }
-
-
 
 
 
